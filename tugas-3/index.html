@@ -1,1 +1,159 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tugas 3 - Kalkulator jQuery</title>
+  
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+        .calculator-card {
+            background-color: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+        .identity {
+            text-align: center;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+        .identity h3 {
+            margin: 0;
+            color: #1a365d;
+        }
+        .identity p {
+            margin: 5px 0 0;
+            color: #4a5568;
+            font-weight: bold;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #2d3748;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            font-size: 16px;
+        }
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        .btn-group button {
+            padding: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            background-color: #3182ce;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .btn-group button:hover {
+            background-color: #2b6cb0;
+        }
+        .result-box {
+            background-color: #edf2f7;
+            padding: 12px;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2d3748;
+        }
+    </style>
+</head>
+<body>
 
+<div class="calculator-card">
+  
+    <div class="identity">
+        <h3>Aplikasi Kalkulator</h3>
+        <p>Nama: Ghalia Shafia Misha</p>
+        <p>NIM: 25510707111053</p>
+    </div>
+
+    <div class="form-group">
+        <label for="num1">Angka Pertama:</label>
+        <input type="number" id="num1" placeholder="Masukkan angka pertama">
+    </div>
+
+    <div class="form-group">
+        <label for="num2">Angka Kedua:</label>
+        <input type="number" id="num2" placeholder="Masukkan angka kedua">
+    </div>
+
+    <div class="btn-group">
+        <button class="btn-op" data-op="+">+</button>
+        <button class="btn-op" data-op="-">-</button>
+        <button class="btn-op" data-op="*">&times;</button>
+        <button class="btn-op" data-op="/">/</button>
+    </div>
+
+    <div class="result-box" id="result">
+        Hasil: -
+    </div>
+</div>
+
+<script>
+    $(document).ready(function() {
+        $('.btn-op').click(function() {
+            var num1 = parseFloat($('#num1').val());
+            var num2 = parseFloat($('#num2').val());
+            var op = $(this).data('op');
+            var result = 0;
+
+            if (isNaN(num1) || isNaN(num2)) {
+                $('#result').text('Hasil: Harap isi kedua angka!').css('color', '#e53e3e');
+                return;
+            }
+          
+            switch(op) {
+                case '+':
+                    result = num1 + num2;
+                    break;
+                case '-':
+                    result = num1 - num2;
+                    break;
+                case '*':
+                    result = num1 * num2;
+                    break;
+                case '/':
+                    if (num2 === 0) {
+                        $('#result').text('Hasil: Tidak bisa dibagi 0!').css('color', '#e53e3e');
+                        return;
+                    }
+                    result = num1 / num2;
+                    break;
+            }
+
+            $('#result').text('Hasil: ' + result).css('color', '#2d3748');
+        });
+    });
+</script>
+
+</body>
+</html>
